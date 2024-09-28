@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Estudiante;
-use App\Models\Curso;
+// use App\Models\Estudiante;
+// use App\Models\Curso;
+
+use App\Models\Finca;
+use App\Models\Propietario;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,11 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Estudiante::factory()->times(15)->create();
-        Curso::factory()->times(8)->create()->each(function ($curso){
-            $curso->estudiantes()->sync(
-                Estudiante::all()->random(3)
-            );
+        Finca::factory(15)->create();
+        Propietario::factory(8)->create()->each(function($Propietario){
+            $Propietario->Fincas()->sync(Finca::all()->random(3));
         });
     }
 }

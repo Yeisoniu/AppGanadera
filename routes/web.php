@@ -1,11 +1,9 @@
 <?php
 
+use App\Http\Controllers\FincaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PropietarioController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\homecontroller;
-use App\Http\Controllers\CursoController;
-use Illuminate\Routing\Router;
-use PhpParser\Builder\Function_;
-use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +16,23 @@ use PhpParser\Node\Expr\FuncCall;
 |
 */
 
-Route::get('/',homecontroller::class);
+Route::get('/', HomeController::class);
 
-Route::controller(CursoController::class)-> group(Function(){
-    Route::get('/curso/crear',  'create');
-    Route::get('/curso', 'index' );
-    Route::get('/curso/hola/{nombre}', 'show');
+
+Route::controller(FincaController::class)->group(function () {
+    Route::get('fincas', 'index')->name('fincas.index');
+    Route::get('fincas/create', 'create')->name('fincas.create');
+    Route::post('fincas', 'store')->name('fincas.store');
+    Route::get('fincas/{finca}', 'show')->name('fincas.show');
+    Route::get('fincas/{finca}/edit', 'edit')->name('fincas.edit');
+    Route::put('fincas/{finca}', 'update')->name('fincas.update');
+});
+
+Route::controller(PropietarioController::class)->group(function () {
+    Route::get('propietarios', 'index')->name('propietarios.index');
+    Route::get('propietarios/create', 'create')->name('propietarios.create');
+    Route::post('propietarios', 'store')->name('propietarios.store');
+    Route::get('propietarios/{propietario}', 'show')->name('propietarios.show');
+    Route::get('propietarios/{propietario}/edit', 'edit')->name('propietarios.edit');
+    Route::put('propietarios/{propietario}', 'update')->name('propietarios.update');
 });

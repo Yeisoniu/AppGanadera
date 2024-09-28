@@ -3,5 +3,5 @@
 @section('title','home')
 
 @section('content')
-    <h1>Bienvenido al himalaya</h1>
+    <h1>Bienvenido al la pagina principal</h1>
 @endsection
